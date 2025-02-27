@@ -139,6 +139,6 @@ Before running the crawler, please confirm the total number of reviews in your s
 
 # last
 
-如果你遇到问题，请在issue中提出来，觉得有用的话请给我的项目一个star。
+如果你遇到问题，请在issue中提出来，觉得有用的话欢迎给我的项目一个star。
 
 If you encounter any issues, please raise them in the Issues section. If you find this project useful, kindly give it a star.
