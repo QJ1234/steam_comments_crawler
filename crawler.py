@@ -27,7 +27,7 @@ def get_reviews_per_page(url, headers):
     for review in reviews:
         nick = review.find('div', {'class': 'apphub_CardContentAuthorName'})
         title = review.find('div', {'class': 'title'}).text
-        hours = review.find('div', {'class': 'hours'}).text.split(' ')[0]
+        hours = review.find('div', {'class': 'hours'}).text.split(' ')
         date_posted = review.find('div', {'class': 'date_posted'}).text
         num_replys = review.find('div', {'class': 'apphub_CardCommentCount alignNews'}).text.replace(',', '')
         content_text = parse_reviews(review)
