@@ -119,17 +119,6 @@ def crawl(url, game_id, num_comments, language, file_name, headers):
         current_page = i
         return current_page
 
-with open('configs.json', 'r') as f:
-    configs = json.load(f)
-
-url = configs.get('url')
-game_id = configs.get('game_id')
-num_comments = configs.get('num_comments')
-language = configs.get('language')
-file_name = configs.get('file_name')
-headers = configs.get('headers')
-
-
 def main():
     with open('configs.json', 'r') as f:
         configs = json.load(f)
