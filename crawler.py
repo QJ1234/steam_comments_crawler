@@ -48,12 +48,14 @@ def build_url(game_id: str, page: int, language: str, user_reviews_cursor: str) 
         'discussionspage': str(page),
         'numperpage': '10',
         'browsefilter': 'mostrecent',
-        'l': language,
+        'browsefilter': 'mostrecent',
+        'appid': game_id,
         'appHubSubSection': '10',
+        'appHubSubSection': '10',
+        'l': language,
         'filterLanguage': language,
         'searchText': '',
         'maxInappropriateScore': '100',
-        'forceanon': '1'
     }
     base_url = 'http://steamcommunity.com/app/'
     return urljoin(base_url, f'{game_id}/homecontent/') + '?' + urlencode(query_params)
