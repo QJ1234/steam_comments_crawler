@@ -25,9 +25,11 @@ def parse_reviews(review) -> str:
     if not card:
         return ''
     date_posted = card.select_one('.date_posted')
-    if date_posted:
-        date_posted.decompose()
-    return _clean_text(card.text)
+    date_text = date_posted.get_text(strip=True) if date_posted else ''
+    card_text = card.get_text(separator=' ', strip=True)
+    if date_text:
+        card_text = card_text.replace(date_text, '', 1).strip()
+    return _clean_text(card_text)
 
 
 def build_url(game_id: str, page: int, language: str, user_reviews_cursor: str) -> str:
@@ -90,7 +92,7 @@ def get_reviews_per_page(session: Session, url: str, max_retries: int = 3, backo
                     hours.text.strip().split(' ') if hours else [],
                     date_posted.text.strip() if date_posted else '',
                     (num_replys.text.replace(',', '').strip() if num_replys else ''),
-                    find_helpful.text.strip() if find_helpful else '',
+                    _clean_text(find_helpful.text.strip() if find_helpful else ''),
                     awarded.text.strip() if awarded else '',
                     num_user_products.text.strip() if num_user_products else '',
                     content_text,
@@ -100,7 +102,7 @@ def get_reviews_per_page(session: Session, url: str, max_retries: int = 3, backo
             return review_list, user_reviews_cursor
         except Exception as exc:
             last_exc = exc
-            time.sleep(backoff * (1 + random.random()))
+            time.sleep(backoff * (random.random()))
     raise last_exc
 
 
